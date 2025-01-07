@@ -10,22 +10,24 @@ function Navbar() {
     const navLinks = [
         {
             href: "/",
-            title: "Home"
+            title: "خانه"
         },
         {
             href: "/store",
-            title: "Store"
+            title: "فروشگاه"
         },
     ]
   return (
     <nav className='shadow p-4'>
         <Container>
-            {navLinks.map((item => (
-                <Link href={item.href} key={item.href}
-                className={`mr-4 ${pathname === item.href ? "text-sky-500" : ""}`}>
-                    {item.title}
-                </Link>
-            )))}
+            <div className='flex flex-row-reverse'>
+                {navLinks.map((item => (
+                    <Link href={item.href} key={item.href}
+                    className={`mr-4 ${pathname === item.href ? "text-sky-500" : ""}`}>
+                        {item.title}
+                    </Link>
+                )))}
+            </div>
         </Container>
     </nav>
   )
