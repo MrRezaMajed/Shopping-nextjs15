@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 interface IProductProps{
@@ -10,10 +11,10 @@ interface IProductProps{
 function ProductItem({image,title,price}: IProductProps) {
   return (
     <div className='shadow-md rounded-xl'>
-        <img src={image}  alt=""/>
+        <Image src={image} width={300} height={300} alt=""/>
         <div className='p-3 text-right rtl'>
             <h3>{title}</h3>
-            <p>قیمت: <span>{price}$</span></p>
+            <p className='mt-4'>قیمت: <span>{price}$</span></p>
         </div>
     </div>
   )
