@@ -1,14 +1,14 @@
 import Image from 'next/image'
 import React from 'react'
 
-interface IProductProps{
+export interface IProductItemProps{
     id: string,
     image: string,
     title: string,
     description: string,
     price: number
 }
-function ProductItem({image,title,price}: IProductProps) {
+function ProductItem({image,title,price}: IProductItemProps) {
   return (
     <div className='shadow-md rounded-xl'>
         <Image src={image} width={300} height={300} alt=""/>
