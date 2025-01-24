@@ -1,3 +1,4 @@
+import AddToCart from '@/components/AddToCart';
 import Container from '@/components/Container'
 import { IProductItemProps } from '@/components/ProductItem'
 import Image from 'next/image'
@@ -19,11 +20,7 @@ async function Product({params}: IProductProps) {
                 <h2 className='font-bold text-2xl'>{data.title}</h2>
                 <p className='text-gray-600 mt-4'>{data.description}</p>
                 <p className='font-bold mt-6'>قیمت: <span>{data.price}</span></p>
-                <div className='mt-4'>
-                    <button className='px-4 py-2 rounded bg-sky-500 text-white'>+</button>
-                    <span className='mx-4'>3</span>
-                    <button className='px-4 py-2 rounded bg-sky-500 text-white'>-</button>
-                </div> 
+                <AddToCart />
             </div>
             <div className='col-span-3'>
                 <Image src={data.image} width={300}
