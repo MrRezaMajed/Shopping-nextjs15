@@ -6,6 +6,7 @@ First, run the development server:
 
 ```bash
 npm run dev
+npx json-server --watch src/database/db.json --port 3004
 # or
 yarn dev
 # or
