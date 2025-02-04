@@ -1,0 +1,139 @@
+کد بالا یک Context برای مدیریت سبد خرید در React ایجاد می‌کند. بیایید بخش‌های مختلف را بررسی و بهینه‌سازی کنیم:
+
+**بهینه‌سازی‌ها و تغییرات اصلی:**
+1. بهبود نامگذاری برای خوانایی بهتر
+2. استفاده از === به جای == برای مقایسه‌های صحیح
+3. ساده‌سازی برخی توابع با روش‌های بهینه
+4. افزودن توضیحات بیشتر
+5. استفاده از useMemo برای محاسبات مشتق شده
+
+**نسخه بهینه‌شده کد:**
+
+```typescript
+"use client"
+import { createContext, useContext, useMemo, useState } from "react";
+
+type ShoppingCartProviderProps = {
+  children: React.ReactNode;
+};
+
+type CartItem = {
+  id: number;
+  quantity: number;
+};
+
+type ShoppingCartContextType = {
+  cartItems: CartItem[];
+  totalQuantity: number;
+  getItemQuantity: (id: number) => number;
+  addItem: (id: number) => void;
+  decreaseItem: (id: number) => void;
+  removeItem: (id: number) => void;
+};
+
+const ShoppingCartContext = createContext<ShoppingCartContextType | null>(null);
+
+export const useShoppingCart = () => {
+  const context = useContext(ShoppingCartContext);
+  if (!context) {
+    throw new Error("useShoppingCart must be used within a Provider");
+  }
+  return context;
+};
+
+export const ShoppingCartProvider = ({ children }: ShoppingCartProviderProps) => {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  // محاسبه کل تعداد آیتم‌ها با useMemo
+  const totalQuantity = useMemo(
+    () => cartItems.reduce((total, item) => total + item.quantity, 0),
+    [cartItems]
+  );
+
+  const getItemQuantity = (id: number) => 
+    cartItems.find(item => item.id === id)?.quantity ?? 0;
+
+  const addItem = (id: number) => {
+    setCartItems(currentItems => {
+      const existingItem = currentItems.find(item => item.id === id);
+      
+      if (!existingItem) {
+        return [...currentItems, { id, quantity: 1 }];
+      }
+      
+      return currentItems.map(item =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+    });
+  };
+
+  const decreaseItem = (id: number) => {
+    setCartItems(currentItems => {
+      const targetItem = currentItems.find(item => item.id === id);
+      
+      if (!targetItem) return currentItems;
+      
+      if (targetItem.quantity === 1) {
+        return currentItems.filter(item => item.id !== id);
+      }
+      
+      return currentItems.map(item =>
+        item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+      );
+    });
+  };
+
+  const removeItem = (id: number) => {
+    setCartItems(currentItems => 
+      currentItems.filter(item => item.id !== id)
+    );
+  };
+
+  const value = useMemo(() => ({
+    cartItems,
+    totalQuantity,
+    getItemQuantity,
+    addItem,
+    decreaseItem,
+    removeItem
+  }), [cartItems, totalQuantity]);
+
+  return (
+    <ShoppingCartContext.Provider value={value}>
+      {children}
+    </ShoppingCartContext.Provider>
+  );
+};
+```
+
+**تغییرات اصلی و توضیحات:**
+
+1. **نامگذاری بهبودیافته:**
+   - `CartItem` به جای `CartItems` (مفرد برای نمایش یک آیتم)
+   - `addItem`, `decreaseItem` به جای نام‌های طولانی
+   - `totalQuantity` به جای `cartTotalQty` برای خوانایی بهتر
+
+2. **استفاده از useMemo:**
+   - برای محاسبه `totalQuantity` و مقدار context
+   - جلوگیری از محاسبات اضافی هنگام رندرهای مجدد
+
+3. **خطایابی بهتر در هوک:**
+   - بررسی وجود context برای جلوگیری از استفاده نادرست
+
+4. **ساده‌سازی منطق توابع:**
+   - حذف بررسی‌های تکراری با استفاده از متغیرهای موقت
+   - استفاده از ?? (nullish coalescing) برای مقدار پیش‌فرض
+
+5. **بهبود امنیت نوع داده:**
+   - استفاده از === به جای ==
+   - افزودن بررسی null برای context
+
+6. **ساختار کد تمیزتر:**
+   - مرتب‌سازی توابع و متغیرها
+   - استفاده از قالب استاندارد برای توابع arrow
+
+7. **بهینه‌سازی عملکرد:**
+   - جلوگیری از ایجاد آرایه‌های جدید غیرضروری
+   - بهینه‌سازی عملیات‌های آرایه با استفاده از متدهای مناسب
+
+این تغییرات کد را خواناتر، ایمن‌تر و کارآمدتر می‌کند و همچنین قابلیت نگهداری را بهبود می‌بخشد.
