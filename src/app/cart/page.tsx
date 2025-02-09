@@ -1,16 +1,18 @@
+"use client"
 import CartItem from "@/components/CartItem"
 import Container from "@/components/Container"
+import { useShoppingCartContext } from "@/context/ShoppingCartContext"
 
 
 function Cart() {
+  const {cartItems} = useShoppingCartContext()
   return (
     <Container>
         <h1 className="text-right my-4">سبد خرید</h1>
         <div className="">
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            
+          {cartItems.map((item) => (
+            <CartItem key={item.id} {...item}/>
+          ))}  
         </div>
         <div className="border shadow-md text-right p-4">
             <h3 > قیمت کل: <span>275000 تومان</span></h3>

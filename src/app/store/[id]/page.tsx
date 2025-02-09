@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React from 'react'
 
 interface IProductProps{
-    params: Promise<{id: string}>;
+    params: Promise<{id: number}>;
     searchParams: Promise<{}>;
 }
 
@@ -16,7 +16,7 @@ async function Product({params}: IProductProps) {
   return (
     <Container>
         <div className='grid grid-cols-12 mt-8 shadow-md rounded-lg'>
-            <div className='col-span-9 rtl text-right p-4'>
+            <div className='col-span-9 text-right p-4'>
                 <h2 className='font-bold text-2xl'>{data.title}</h2>
                 <p className='text-gray-600 mt-4'>{data.description}</p>
                 <p className='font-bold mt-6'>قیمت: <span>{data.price}</span></p>

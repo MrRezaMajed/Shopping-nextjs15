@@ -32,7 +32,7 @@ function Navbar() {
                     )))}
                 </div>
                 <div className=''>
-                    <span className='px-2 py-1 bg-green-500 text-white rounded-full'>{cartTotalQty}</span>
+                    <span className='px-3 py-1 bg-green-500 text-white rounded-full'>{cartTotalQty}</span>
                     <Link href="/cart">
                         <span>سبد خرید</span>
                     </Link>

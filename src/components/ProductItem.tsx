@@ -2,7 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 
 export interface IProductItemProps{
-    id: string,
+    id: number,
     image: string,
     title: string,
     description: string,
