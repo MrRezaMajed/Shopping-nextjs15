@@ -5,35 +5,35 @@
             "image": "https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-1170x780.jpg",
             "title": " محصول یک",
             "description": "محصولی از برند اصلی",
-            "price": 2000
+            "price": 200000
         },
         {
             "id": "2",
             "image": "https://www.gfxdownload.ir/uploads/posts/2024-09/fox1.jpg",
             "title": "محصول دو",
             "description": "محصولی از برند اصلی",
-            "price": 3000
+            "price": 300000
         },
         {
             "id": "3",
             "image": "https://www.gfxdownload.ir/uploads/posts/2024-08/scorpian2.jpg",
             "title": "محصول سه",
             "description": "محصولی از برند اصلی",
-            "price": 4000
+            "price": 400000
         },
         {
             "id": "4",
             "image": "https://www.gfxdownload.ir/uploads/posts/2023-08/medical.jpg",
             "title": "محصول چهار",
             "description": "محصولی از برند اصلی",
-            "price": 5000
+            "price": 500000
         },
         {
             "id": "5",
             "image": "https://www.gfxdownload.ir/uploads/posts/2023-09/medical-heart2.jpg",
             "title": "محصول پنج",
             "description": "محصولی از برند اصلی",
-            "price": 6000
+            "price": 600000
         }
     ]
 }

@@ -39,6 +39,7 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { IProductItemProps } from './ProductItem'
 import AddToCart from './AddToCart'
+import { formatNumberWithCommas } from '@/utils/formatNumberWithCommas'
 
 interface CartItemProps {
   id: number
@@ -75,10 +76,10 @@ function CartItem({ id, qty }: CartItemProps) {
       <div className="col-span-10 text-right p-4">
         <h2 className="text-xl font-bold">{product.title}</h2>
         <p className="mt-2">
-          تعداد: <span className="font-semibold">{qty}</span>
+          تعداد: <span className="font-semibold">{formatNumberWithCommas(qty)}</span>
         </p>
         <p className="mt-2">
-          قیمت: <span className="font-semibold">{product.price} تومان</span>
+          قیمت: <span className="font-semibold">{formatNumberWithCommas(product.price)} تومان</span>
         </p>
         <div className="mt-4">
           <AddToCart id={id} />
